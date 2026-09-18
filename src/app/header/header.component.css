@@ -1,0 +1,9 @@
+header.header {
+    background-color: rgb(225, 241, 255);
+    padding: 20px;
+}
+
+.header-logo img {
+    width: 120px;
+    height: auto;
+}

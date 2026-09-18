@@ -1,0 +1,9 @@
+footer.footer {
+    background-color: rgb(225, 241, 255);
+    padding: 20px;
+}
+
+.footer-logo img {
+    width: 120px;
+    height: auto;
+}
