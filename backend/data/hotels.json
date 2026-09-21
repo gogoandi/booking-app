@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Tirana Central Hotel",
+    "city": "Tirana",
+    "pricePerNight": 75,
+    "imageUrl": "/images/tirana-central.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Tirana Plaza Hotel",
+    "city": "Tirana",
+    "pricePerNight": 110,
+    "imageUrl": "/images/tirana-plaza.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Durres Beach Resort",
+    "city": "Durres",
+    "pricePerNight": 95,
+    "imageUrl": "/images/durres-beach.jpg"
+  }
+]

@@ -1,0 +1,29 @@
+<article class="hotel-item">
+    <div class="hotel-image">
+        <div class="image-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 68V20h44v48M10 68h60M31 68V53h18v15M28 30h6m12 0h6M28 40h6m12 0h6M28 12h24v8" />
+            </svg>
+            <span>A stay in {{ hotel().city }}</span>
+        </div>
+        @if (hotel().imageUrl) {
+            <img #hotelImage [src]="hotel().imageUrl" [alt]="hotel().name"
+                loading="lazy" width="640" height="400" (error)="hotelImage.hidden = true" />
+        }
+        <span class="hotel-badge">Hotel</span>
+    </div>
+    <div class="hotel-content">
+        <p class="hotel-location">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z" />
+                <circle cx="12" cy="10" r="2.5" />
+            </svg>
+            {{ hotel().city }}
+        </p>
+        <h3>{{ hotel().name }}</h3>
+        <div class="hotel-price">
+            <span class="price-label">Nightly rate</span>
+            <p><strong>{{ hotel().pricePerNight }}</strong><span> / night</span></p>
+        </div>
+    </div>
+</article>

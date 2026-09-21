@@ -23,6 +23,7 @@
   min-height: clamp(620px, 85vh, 820px);
   overflow: hidden;
   color: var(--white);
+  padding: 120px 0 55px;
 }
 
 .hero-background,
@@ -49,24 +50,7 @@
       rgba(30, 58, 138, 0.75) 50%,
       rgba(37, 99, 235, 0.2) 100%
     ),
-    linear-gradient(
-      0deg,
-      rgba(15, 23, 42, 0.6) 0%,
-      transparent 50%
-    );
-}
-
-.hero-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: min(1180px, calc(100% - 48px));
-  margin: 0 auto;
-  padding: 120px 0 56px;
-}
-
-.hero-content {
-  max-width: 720px;
+    linear-gradient(0deg, rgba(15, 23, 42, 0.6) 0%, transparent 50%);
 }
 
 .hero-label {
@@ -255,11 +239,7 @@
         rgba(30, 58, 138, 0.78) 70%,
         rgba(37, 99, 235, 0.4) 100%
       ),
-      linear-gradient(
-        0deg,
-        rgba(15, 23, 42, 0.65) 0%,
-        transparent 55%
-      );
+      linear-gradient(0deg, rgba(15, 23, 42, 0.65) 0%, transparent 55%);
   }
 
   .hero-container {

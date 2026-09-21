@@ -3,12 +3,12 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeroComponent } from './hero/hero.component';
 import { SearchEngineComponent } from './search-enginge/search-engine.component';
-import { ButtonComponent } from './shared/button/button.component';
+import { HotelsComponent } from './hotels/hotels.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, HeroComponent, SearchEngineComponent],
+  imports: [HeaderComponent, FooterComponent, HeroComponent, SearchEngineComponent, HotelsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

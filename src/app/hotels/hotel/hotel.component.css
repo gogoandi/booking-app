@@ -1,0 +1,113 @@
+:host {
+  display: block;
+  min-width: 0;
+  height: 100%;
+}
+
+* { box-sizing: border-box; }
+
+.hotel-item {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgb(15 23 42 / 4%);
+  transition: box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.hotel-item:hover {
+  border-color: #bfdbfe;
+  box-shadow: 0 12px 28px rgb(15 23 42 / 9%);
+}
+
+.hotel-image {
+  position: relative;
+  aspect-ratio: 8 / 5;
+  overflow: hidden;
+  background: linear-gradient(135deg, #eff6ff, #dbeafe 60%, #bfdbfe);
+}
+
+.image-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #1e40af;
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+}
+
+.image-placeholder svg { width: 72px; height: 72px; }
+
+.hotel-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hotel-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #fff;
+  color: #1e3a8a;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.hotel-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.hotel-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 10px;
+  color: #475569;
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+
+.hotel-location svg { width: 16px; height: 16px; flex-shrink: 0; color: #2563eb; }
+
+h3 {
+  margin: 0 0 24px;
+  color: #0f172a;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+}
+
+.hotel-price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.price-label, .hotel-price p { color: #475569; font-size: 0.8rem; }
+.hotel-price p { margin: 0; }
+.hotel-price strong { color: #1d4ed8; font-size: 1.65rem; letter-spacing: -0.04em; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hotel-item { transition: none; }
+}

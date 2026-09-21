@@ -1,66 +1,59 @@
-<section class="search-engine" aria-labelledby="search-title">
-  <div class="search-engine-heading">
-    <div>
-      <span class="search-eyebrow">Plan your journey</span>
-      <h2 id="search-title">Find your next destination</h2>
-    </div>
+<div class="container">
+    <section class="search-engine" aria-labelledby="search-title">
+        <div class="search-engine-heading">
+            <div>
+                <span class="search-eyebrow">Plan your journey</span>
+                <h2 id="search-title">Find your next destination</h2>
+            </div>
 
-    <p>Select a city and your travel dates to check availability.</p>
-  </div>
+            <p>Select a city and your travel dates to check availability.</p>
+        </div>
 
-  <form class="search-engine-form">
-    <div class="search-field search-field-city">
-      <app-form-field
-        [formField]="{
+        <form class="search-engine-form">
+            <div class="search-field search-field-city">
+                <app-form-field [formField]="{
           name: 'city',
           label: 'Destination',
           type: 'text'
-        }"
-      ></app-form-field>
-    </div>
+        }"></app-form-field>
+            </div>
 
-    <div class="search-field">
-      <app-form-field
-        [formField]="{
+            <div class="search-field">
+                <app-form-field [formField]="{
           name: 'from-date',
           label: 'Check-in',
           type: 'date'
-        }"
-      ></app-form-field>
-    </div>
+        }"></app-form-field>
+            </div>
 
-    <div class="search-field">
-      <app-form-field
-        [formField]="{
+            <div class="search-field">
+                <app-form-field [formField]="{
           name: 'to-date',
           label: 'Check-out',
           type: 'date'
-        }"
-      ></app-form-field>
-    </div>
+        }"></app-form-field>
+            </div>
 
-    <div class="search-engine-submit">
-      <button
-        appButton
-        buttonName="Search stays"
-      ></button>
-    </div>
-  </form>
+            <div class="search-engine-submit">
+                <button appButton buttonName="Search stays"></button>
+            </div>
+        </form>
 
-  <div class="search-benefits" aria-label="Booking benefits">
-    <span>
-      <span class="benefit-icon" aria-hidden="true">✓</span>
-      Secure booking
-    </span>
+        <div class="search-benefits" aria-label="Booking benefits">
+            <span>
+                <span class="benefit-icon" aria-hidden="true">✓</span>
+                Secure booking
+            </span>
 
-    <span>
-      <span class="benefit-icon" aria-hidden="true">✓</span>
-      Instant confirmation
-    </span>
+            <span>
+                <span class="benefit-icon" aria-hidden="true">✓</span>
+                Instant confirmation
+            </span>
 
-    <span>
-      <span class="benefit-icon" aria-hidden="true">✓</span>
-      No hidden fees
-    </span>
-  </div>
-</section>
+            <span>
+                <span class="benefit-icon" aria-hidden="true">✓</span>
+                No hidden fees
+            </span>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,36 @@
+<section class="hotels-section" aria-labelledby="hotels-heading">
+    <div class="container">
+        <div class="hotels-header">
+            <div>
+                <p class="section-label">Find your next stay</p>
+                <h2 id="hotels-heading">Somewhere to feel at home.</h2>
+                <p class="section-description">Explore hotels for your next city break or coastal escape.</p>
+            </div>
+            @if (!loading() && !error()) {
+                <span class="hotel-count">{{ hotels().length }} {{ hotels().length === 1 ? 'hotel' : 'hotels' }}</span>
+            }
+        </div>
+        <div class="hotels-list" [attr.aria-busy]="loading()">
+            @if (loading()) {
+                <div class="list-message" role="status">
+                    <span class="loading-indicator" aria-hidden="true"></span>
+                    <p>Finding your next stay...</p>
+                </div>
+            } @else if (error()) {
+                <div class="list-message error-message" role="alert">
+                    <h3>We couldn't load the hotels</h3>
+                    <p>{{ error() }}</p>
+                </div>
+            } @else {
+                @for (hotel of hotels(); track hotel.id) {
+                    <app-hotel [hotel]="hotel" />
+                } @empty {
+                    <div class="list-message" role="status">
+                        <h3>No hotels available yet</h3>
+                        <p>Check back soon for places to stay.</p>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
