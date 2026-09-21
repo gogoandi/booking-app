@@ -1,8 +1,31 @@
-<header class="header">
-    <div class="header-content">
-        <div class="header-logo">
-            <img src="logo.png" alt="Logo" />
-        </div>
-        <div class="header-menu"></div>
+<header class="site-header">
+  <div class="header-content">
+    <a class="header-logo" href="/" aria-label="Booking App homepage">
+      <img src="logo.png" alt="Booking App">
+    </a>
+
+    <nav class="header-menu" aria-label="Main navigation">
+      <ul>
+        <li>
+          <a class="active" href="/" aria-current="page">Home</a>
+        </li>
+
+        <li>
+          <a href="#destinations">Destinations</a>
+        </li>
+
+        <li>
+          <a href="#about">About</a>
+        </li>
+
+        <li>
+          <a href="#contact">Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a appButton href="#booking" buttonName="Book Now"></a>
     </div>
+  </div>
 </header>
