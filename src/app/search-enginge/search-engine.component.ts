@@ -9,10 +9,4 @@ import { ButtonComponent } from '../shared/button/button.component';
   templateUrl: './search-engine.component.html',
   styleUrl: './search-engine.component.css',
 })
-export class SearchEngineComponent {
-    formField = input.required<{
-        name: string,
-        label: string,
-        type: string
-    }>();
-}
+export class SearchEngineComponent {}

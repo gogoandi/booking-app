@@ -8,7 +8,7 @@ import { ButtonComponent } from './shared/button/button.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, HeroComponent, SearchEngineComponent, ButtonComponent],
+  imports: [HeaderComponent, FooterComponent, HeroComponent, SearchEngineComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
