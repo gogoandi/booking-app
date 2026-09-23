@@ -9,29 +9,30 @@
             <p>Select a city and your travel dates to check availability.</p>
         </div>
 
-        <form class="search-engine-form">
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="search-engine-form">
             <div class="search-field search-field-city">
                 <app-form-field [formField]="{
           name: 'city',
           label: 'Destination',
-          type: 'text'
-        }"></app-form-field>
+          type: 'text',
+        }" [control]="searchForm.controls.city"></app-form-field>
             </div>
 
             <div class="search-field">
                 <app-form-field [formField]="{
           name: 'from-date',
           label: 'Check-in',
-          type: 'date'
-        }"></app-form-field>
+          type: 'date',
+          min: today
+        }" [control]="searchForm.controls.fromDate"></app-form-field>
             </div>
 
             <div class="search-field">
                 <app-form-field [formField]="{
           name: 'to-date',
           label: 'Check-out',
-          type: 'date'
-        }"></app-form-field>
+          type: 'date',
+        }" [control]="searchForm.controls.toDate"></app-form-field>
             </div>
 
             <div class="search-engine-submit">

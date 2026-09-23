@@ -1,2 +1,13 @@
-<label for=formField().name>{{formField().label}}</label>
-<input [type]=formField().type [name]=formField().name>
+<div class="form-field">
+
+    <label [for]="formField().name"> {{ formField().label }} </label>
+
+    <input
+        [id]="formField().name"
+        [name]="formField().name"
+        [type]="formField().type"
+        [formControl]="control()"
+        [attr.min]="formField().min ?? null"
+    >
+
+</div>

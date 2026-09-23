@@ -45,3 +45,21 @@ input::placeholder {
 input[type="date"] {
   color-scheme: light;
 }
+
+/* Default input transition */
+.form-field input {
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Invalid input after user has edited and left the field */
+.form-field input.ng-invalid.ng-dirty.ng-touched:not(:focus) {
+    border: 1px solid #ef4444;
+    background-color: #fffafa;
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}

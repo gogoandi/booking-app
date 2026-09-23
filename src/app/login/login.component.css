@@ -1,0 +1,391 @@
+/* ========================================
+   LOGIN PAGE
+======================================== */
+
+.login-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    font-family: inherit;
+}
+
+
+/* ========================================
+   LEFT SIDE
+======================================== */
+
+.login-intro {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 45px 60px;
+    color: #fff;
+
+    background:
+        radial-gradient(
+            circle at 90% 15%,
+            rgba(96, 165, 250, 0.25),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            #0f172a 0%,
+            #172e5c 55%,
+            #1d4ed8 100%
+        );
+}
+
+
+/* DECORATIVE CIRCLES */
+
+.login-intro::before {
+    content: "";
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    right: -230px;
+    bottom: 10%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.login-intro::after {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    right: -300px;
+    bottom: -250px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+
+/* BRAND */
+
+.login-brand {
+    position: relative;
+    z-index: 2;
+}
+
+.login-brand img {
+    display: block;
+    max-width: 150px;
+    max-height: 65px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+
+/* INTRO CONTENT */
+
+.login-intro-content {
+    position: relative;
+    z-index: 2;
+    max-width: 510px;
+    margin: 80px 0;
+}
+
+.login-eyebrow {
+    display: inline-block;
+    margin-bottom: 25px;
+    color: #93c5fd;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.login-intro-content h1 {
+    margin: 0 0 25px;
+    font-size: clamp(38px, 4vw, 62px);
+    line-height: 1.15;
+    font-weight: 750;
+    letter-spacing: -2px;
+}
+
+.login-intro-content h1 span {
+    color: #60a5fa;
+}
+
+.login-intro-content > p {
+    max-width: 440px;
+    color: #cbd5e1;
+    font-size: 16px;
+    line-height: 1.85;
+}
+
+
+/* FEATURES */
+
+.login-features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 45px;
+}
+
+.login-feature {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #e2e8f0;
+    font-size: 14px;
+}
+
+.feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    border: 1px solid rgba(147, 197, 253, 0.4);
+    border-radius: 50%;
+    background: rgba(96, 165, 250, 0.15);
+    color: #93c5fd;
+    font-size: 14px;
+}
+
+
+/* FOOTER */
+
+.login-intro-footer {
+    position: relative;
+    z-index: 2;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+
+/* ========================================
+   RIGHT SIDE
+======================================== */
+
+.login-form-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 50px;
+    background: #f8fafc;
+}
+
+.login-form-container {
+    width: 100%;
+    max-width: 430px;
+}
+
+
+/* BACK HOME */
+
+.back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 55px;
+    color: #64748b;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.back-home:hover {
+    color: #2563eb;
+}
+
+.back-home span {
+    font-size: 20px;
+}
+
+
+/* HEADING */
+
+.login-heading {
+    margin-bottom: 38px;
+}
+
+.login-subtitle {
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.login-heading h2 {
+    margin: 15px 0 12px;
+    color: #0f172a;
+    font-size: clamp(28px, 3vw, 36px);
+    line-height: 1.2;
+    font-weight: 750;
+    letter-spacing: -1px;
+}
+
+.login-heading p {
+    margin: 0;
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* ========================================
+   FORM
+======================================== */
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-field label {
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-field input {
+    width: 100%;
+    height: 55px;
+    box-sizing: border-box;
+    padding: 0 17px;
+
+    border: 1px solid #dbe3ef;
+    border-radius: 12px;
+
+    background: #fff;
+    color: #0f172a;
+
+    font: inherit;
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-field input::placeholder {
+    color: #94a3b8;
+}
+
+.form-field input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.loginEmail-error {
+    color: #dc2626;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+/* ========================================
+   BOTTOM CONTENT
+======================================== */
+
+.login-divider {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 40px 0 20px;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+}
+
+.login-divider::before,
+.login-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e2e8f0;
+}
+
+.login-bottom-text {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.7;
+    text-align: center;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 991px) {
+
+    .login-page {
+        grid-template-columns: 1fr;
+    }
+
+    .login-intro {
+        padding: 35px 30px;
+    }
+
+    .login-intro-content {
+        margin: 45px 0 25px;
+    }
+
+    .login-intro-content h1 {
+        font-size: 38px;
+    }
+
+    .login-features,
+    .login-intro-footer {
+        display: none;
+    }
+
+    .login-form-section {
+        padding: 60px 25px;
+    }
+
+    .back-home {
+        margin-bottom: 40px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .login-intro {
+        padding: 25px 20px;
+    }
+
+    .login-intro-content {
+        margin: 30px 0 15px;
+    }
+
+    .login-intro-content h1 {
+        font-size: 30px;
+        letter-spacing: -1px;
+    }
+
+    .login-intro-content > p {
+        font-size: 14px;
+    }
+
+    .login-form-section {
+        padding: 45px 20px;
+    }
+
+    .login-heading h2 {
+        font-size: 28px;
+    }
+
+}

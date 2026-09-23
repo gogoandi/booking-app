@@ -1,0 +1,88 @@
+<div class="login-page">
+
+    <!-- LEFT SIDE -->
+    <div class="login-intro">
+
+        <div class="login-brand">
+            <a routerLink="/"><img src="/logo.png" alt="Booking Logo"></a>
+        </div>
+
+        <div class="login-intro-content">
+
+            <span class="login-eyebrow">YOUR NEXT STAY STARTS HERE</span>
+
+            <h1>Discover places.<br>Create memories.<br><span>Travel better.</span></h1>
+
+            <p>Sign in to manage your bookings, explore beautiful destinations, and find the perfect place for your next
+                stay.</p>
+
+            <div class="login-features">
+                <div class="login-feature">
+                    <span class="feature-icon">✓</span>
+                    <span>Discover beautiful destinations</span>
+                </div>
+                <div class="login-feature">
+                    <span class="feature-icon">✓</span>
+                    <span>Manage your reservations</span>
+                </div>
+                <div class="login-feature">
+                    <span class="feature-icon">✓</span>
+                    <span>Find your perfect stay</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-intro-footer">© 2026 Booking. All rights reserved.</div>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+    <div class="login-form-section">
+
+        <div class="login-form-container">
+
+            <a routerLink="/" class="back-home"><span aria-hidden="true">←</span>Back to homepage</a>
+
+            <div class="login-heading">
+                <span class="login-subtitle">WELCOME BACK</span>
+                <h2>Sign in to your account</h2>
+                <p>Enter your details below to access your account.</p>
+            </div>
+
+
+            <!-- LOGIN FORM -->
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+
+                <div (focusin)="isLoginEmailFocused = true" (focusout)="isLoginEmailFocused = false">
+                    <app-form-field [formField]="{
+                        name: 'email',
+                        label: 'Email Address',
+                        type: 'email',
+                    }" [control]="loginForm.controls.loginEmail" />
+
+                    @if (checkLoginEmail) {
+                        <p class="loginEmail-error">Please enter a valid email address (e.g., name@example.com).</p>
+                    }
+                </div>
+
+                <app-form-field [formField]="{
+                    name: 'password',
+                    label: 'Password',
+                    type: 'password',
+                }" [control]="loginForm.controls.loginPassword" />
+
+                <button appButton buttonName="Sign In"></button>
+
+            </form>
+
+
+            <div class="login-divider">
+                <span>YOUR JOURNEY AWAITS</span>
+            </div>
+
+            <p class="login-bottom-text">Explore destinations and book your next unforgettable stay.</p>
+
+        </div>
+    </div>
+</div>

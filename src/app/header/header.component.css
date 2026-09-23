@@ -1,12 +1,4 @@
 :host {
-  --blue-primary: #2563eb;
-  --blue-hover: #1d4ed8;
-  --blue-light: #60a5fa;
-  --blue-pale: #dbeafe;
-  --blue-dark: #1e3a8a;
-  --navy: #0f172a;
-  --white: #ffffff;
-
   display: block;
 }
 
@@ -94,12 +86,12 @@
 
 .header-menu a:hover {
   background: rgba(37, 99, 235, 0.15);
-  color: var(--white);
+  color: white;
 }
 
 .header-menu a.active {
   background: rgba(37, 99, 235, 0.2);
-  color: var(--white);
+  color: white;
 }
 
 .header-menu a.active::after {

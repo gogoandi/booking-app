@@ -1,32 +1,21 @@
 <header class="site-header">
   <div class="container">
     <div class="header-content">
-    <a class="header-logo" href="/" aria-label="Booking App homepage">
+    <a class="header-logo" routerLink="/" aria-label="Booking App homepage">
       <img src="logo.png" alt="Booking App">
     </a>
 
     <nav class="header-menu" aria-label="Main navigation">
       <ul>
-        <li>
-          <a class="active" href="/" aria-current="page">Home</a>
-        </li>
-
-        <li>
-          <a href="#destinations">Destinations</a>
-        </li>
-
-        <li>
-          <a href="#about">About</a>
-        </li>
-
-        <li>
-          <a href="#contact">Contact</a>
-        </li>
+        <li><a class="active" routerLink="/" aria-current="page">Home</a></li>
+        <li><a href="">Destinations</a></li>
+        <li><a href="">About</a></li>
+        <li><a href="">Contact</a></li>
       </ul>
     </nav>
 
     <div class="header-actions">
-      <a appButton href="#booking" buttonName="Book Now"></a>
+      <a appButton routerLink="login" buttonName="Login"></a>
     </div>
   </div>
   </div>

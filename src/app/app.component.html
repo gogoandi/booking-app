@@ -1,16 +1,9 @@
-<!-- HEADER -->
-<app-header />
+@if (!router.url.startsWith('/login')) {
+    <app-header />
+}
 
-<!-- CONTENT -->
-<div class="page">
-    <app-hero />
+<router-outlet />
 
-    <!-- SEARCH ENGINE -->
-    <app-search-engine />
-
-    <!-- LIST HOTELS -->
-    <app-hotels />
-</div>
-
-<!-- FOOTER -->
-<app-footer />
+@if (!router.url.startsWith('/login')) {
+    <app-footer />
+}
