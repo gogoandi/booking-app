@@ -11,7 +11,7 @@ import {
 
 import { RouterLink } from '@angular/router';
 
-import { FormFieldComponent } from '../shared/form-field/form-field.component';
+import { FormFieldComponent } from '../../shared/form-field/form-field.component';
 
 
 function passwordsMatch(control: AbstractControl): ValidationErrors | null {

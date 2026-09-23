@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ButtonComponent } from '../shared/button/button.component';
-import { FormFieldComponent } from '../shared/form-field/form-field.component';
+import { ButtonComponent } from '../../shared/button/button.component';
+import { FormFieldComponent } from '../../shared/form-field/form-field.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
