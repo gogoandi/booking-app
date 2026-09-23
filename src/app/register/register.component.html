@@ -1,0 +1,172 @@
+<div class="register-page">
+
+    <!-- LEFT SIDE -->
+    <div class="register-intro">
+
+        <a routerLink="/" class="register-brand">
+            <img src="/logo.png" alt="Booking Logo">
+        </a>
+
+        <div class="register-intro-content">
+
+            <span class="register-eyebrow">
+                YOUR JOURNEY STARTS HERE
+            </span>
+
+            <h1>
+                A world of stays.<br>
+                One account.<br>
+                <span>Endless possibilities.</span>
+            </h1>
+
+            <p>
+                Join Booking and discover beautiful destinations,
+                manage your reservations, and find the perfect
+                place for your next adventure.
+            </p>
+
+            <div class="register-features">
+
+                <div class="register-feature">
+                    <span class="feature-icon">✓</span>
+                    <span>Explore amazing destinations</span>
+                </div>
+
+                <div class="register-feature">
+                    <span class="feature-icon">✓</span>
+                    <span>Save your favorite hotels</span>
+                </div>
+
+                <div class="register-feature">
+                    <span class="feature-icon">✓</span>
+                    <span>Manage bookings in one place</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="register-intro-footer">
+            © 2026 Booking. All rights reserved.
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+    <div class="register-form-section">
+
+        <div class="register-form-container">
+
+            <a routerLink="/" class="back-home">
+                <span aria-hidden="true">←</span>
+                Back to homepage
+            </a>
+
+            <div class="register-heading">
+
+                <span class="register-subtitle">
+                    JOIN BOOKING
+                </span>
+
+                <h2>Create your account</h2>
+
+                <p>
+                    Fill in your details below to get started
+                    with your next adventure.
+                </p>
+
+            </div>
+
+
+            <!-- REGISTER FORM -->
+            <form
+                class="register-form"
+                [formGroup]="registerForm"
+                (ngSubmit)="onSubmit()"
+            >
+
+                <!-- FULL NAME -->
+                <app-form-field
+                    [formField]="{
+                        name: 'fullName',
+                        label: 'Full Name',
+                        type: 'text'
+                    }"
+                    [control]="registerForm.controls.fullName"
+                />
+
+
+                <!-- EMAIL -->
+                <app-form-field
+                    [formField]="{
+                        name: 'email',
+                        label: 'Email Address',
+                        type: 'email'
+                    }"
+                    [control]="registerForm.controls.email"
+                />
+
+
+                <!-- PASSWORD -->
+                <app-form-field
+                    [formField]="{
+                        name: 'password',
+                        label: 'Password',
+                        type: 'password'
+                    }"
+                    [control]="registerForm.controls.password"
+                />
+
+
+                <!-- CONFIRM PASSWORD -->
+                <app-form-field
+                    [formField]="{
+                        name: 'confirmPassword',
+                        label: 'Confirm Password',
+                        type: 'password'
+                    }"
+                    [control]="registerForm.controls.confirmPassword"
+                />
+
+                @if (
+                    registerForm.hasError('passwordMismatch') &&
+                    registerForm.controls.confirmPassword.dirty &&
+                    registerForm.controls.confirmPassword.touched
+                ) {
+                    <p class="register-error">
+                        Passwords do not match.
+                    </p>
+                }
+
+
+                <!-- SUBMIT -->
+                <button
+                    type="submit"
+                    class="register-submit"
+                >
+                    Create Account
+                    <span aria-hidden="true">→</span>
+                </button>
+
+            </form>
+
+
+            <!-- LOGIN LINK -->
+            <div class="register-divider">
+                <span>ALREADY A MEMBER?</span>
+            </div>
+
+            <p class="register-bottom-text">
+                Already have an account?
+
+                <a routerLink="/login" class="login-link">
+                    Sign in
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>

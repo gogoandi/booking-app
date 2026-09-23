@@ -1,9 +1,9 @@
-@if (!router.url.startsWith('/login')) {
+@if (!isAuthPage) {
     <app-header />
 }
 
 <router-outlet />
 
-@if (!router.url.startsWith('/login')) {
+@if (!isAuthPage) {
     <app-footer />
 }

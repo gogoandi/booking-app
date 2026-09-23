@@ -62,7 +62,7 @@
                     }" [control]="loginForm.controls.loginEmail" />
 
                     @if (checkLoginEmail) {
-                        <p class="loginEmail-error">Please enter a valid email address (e.g., name@example.com).</p>
+                    <p class="loginEmail-error">Please enter a valid email address (e.g., name@example.com).</p>
                     }
                 </div>
 
@@ -78,11 +78,13 @@
 
 
             <div class="login-divider">
-                <span>YOUR JOURNEY AWAITS</span>
+                <span>NEW TO BOOKING?</span>
             </div>
 
-            <p class="login-bottom-text">Explore destinations and book your next unforgettable stay.</p>
-
+            <p class="login-bottom-text">
+                Don't have an account?
+                <a routerLink="/register" class="register-link">Create an account</a>
+            </p>
         </div>
     </div>
 </div>

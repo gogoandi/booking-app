@@ -16,4 +16,10 @@ export class AppComponent {
   
     router = inject(Router);
 
+    get isAuthPage(): boolean {
+        const authRoutes = ['/login', '/register'];
+        return authRoutes.includes(this.router.url.split('?')[0]);
+    }
+
+
 }
