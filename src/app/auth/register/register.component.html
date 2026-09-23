@@ -9,21 +9,12 @@
 
         <div class="register-intro-content">
 
-            <span class="register-eyebrow">
-                YOUR JOURNEY STARTS HERE
-            </span>
+            <span class="register-eyebrow">YOUR JOURNEY STARTS HERE</span>
 
-            <h1>
-                A world of stays.<br>
-                One account.<br>
-                <span>Endless possibilities.</span>
-            </h1>
+            <h1>A world of stays.<br>One account.<br><span>Endless possibilities.</span></h1>
 
-            <p>
-                Join Booking and discover beautiful destinations,
-                manage your reservations, and find the perfect
-                place for your next adventure.
-            </p>
+            <p>Join Booking and discover beautiful destinations, manage your reservations, and find the perfect place
+                for your next adventure.</p>
 
             <div class="register-features">
 
@@ -65,89 +56,103 @@
 
             <div class="register-heading">
 
-                <span class="register-subtitle">
-                    JOIN BOOKING
-                </span>
+                <span class="register-subtitle">JOIN BOOKING</span>
 
                 <h2>Create your account</h2>
 
-                <p>
-                    Fill in your details below to get started
-                    with your next adventure.
-                </p>
+                <p>Fill in your details below to get started with your next adventure.</p>
 
             </div>
 
 
             <!-- REGISTER FORM -->
-            <form
-                class="register-form"
-                [formGroup]="registerForm"
-                (ngSubmit)="onSubmit()"
-            >
+            <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
                 <!-- FULL NAME -->
-                <app-form-field
-                    [formField]="{
+                <app-form-field [formField]="{
                         name: 'fullName',
                         label: 'Full Name',
                         type: 'text'
-                    }"
-                    [control]="registerForm.controls.fullName"
-                />
+                    }" [control]="registerForm.controls.fullName" />
 
 
                 <!-- EMAIL -->
-                <app-form-field
-                    [formField]="{
-                        name: 'email',
-                        label: 'Email Address',
-                        type: 'email'
-                    }"
-                    [control]="registerForm.controls.email"
-                />
+                <div class="register-email-section" [class.has-error]="showEmailError" (focusin)="isEmailFocused = true"
+                    (focusout)="isEmailFocused = false">
+                    <app-form-field [formField]="{
+            name: 'email',
+            label: 'Email Address',
+            type: 'email'
+        }" [control]="registerForm.controls.email" />
 
+                    <div class="register-email-error-wrapper" [class.is-visible]="showEmailError"
+                        [attr.aria-hidden]="!showEmailError">
+                        <div class="register-email-error-inner">
+                            <p class="register-error">
+                                {{ emailErrorMessage }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- PASSWORD -->
-                <app-form-field
-                    [formField]="{
-                        name: 'password',
-                        label: 'Password',
-                        type: 'password'
-                    }"
-                    [control]="registerForm.controls.password"
-                />
+                <div class="register-password-section" [class.has-error]="showPasswordError"
+                    (focusin)="isPasswordFocused = true" (focusout)="isPasswordFocused = false">
+                    <app-form-field [formField]="{
+            name: 'password',
+            label: 'Password',
+            type: 'password'
+        }" [control]="registerForm.controls.password" />
+
+                    @let requirements = passwordRequirements;
+
+                    <div class="register-password-tips" [class.has-value]="hasPasswordValue">
+                        <p class="password-tips-title">
+                            Your password must contain:
+                        </p>
+
+                        <ul>
+                            <li [class.completed]="requirements.length">
+                                At least 9 characters
+                            </li>
+
+                            <li [class.completed]="requirements.letterCase">
+                                One lowercase and one uppercase letter
+                            </li>
+
+                            <li [class.completed]="requirements.specialCharacter">
+                                At least one special character
+                            </li>
+
+                            <li [class.completed]="requirements.number">
+                                At least one number
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
 
                 <!-- CONFIRM PASSWORD -->
-                <app-form-field
-                    [formField]="{
-                        name: 'confirmPassword',
-                        label: 'Confirm Password',
-                        type: 'password'
-                    }"
-                    [control]="registerForm.controls.confirmPassword"
-                />
+                <div class="confirm-password-section" [class.has-error]="checkPasswordMismatch"
+                    (focusin)="isConfirmPasswordFocused = true" (focusout)="isConfirmPasswordFocused = false">
+                    <app-form-field [formField]="{
+            name: 'confirmPassword',
+            label: 'Confirm Password',
+            type: 'password'
+        }" [control]="registerForm.controls.confirmPassword" />
 
-                @if (
-                    registerForm.hasError('passwordMismatch') &&
-                    registerForm.controls.confirmPassword.dirty &&
-                    registerForm.controls.confirmPassword.touched
-                ) {
-                    <p class="register-error">
-                        Passwords do not match.
-                    </p>
-                }
-
+                    <div class="register-error-wrapper" [class.is-visible]="checkPasswordMismatch"
+                        [attr.aria-hidden]="!checkPasswordMismatch">
+                        <div class="register-error-inner">
+                            <p class="register-error">
+                                Passwords do not match.
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- SUBMIT -->
-                <button
-                    type="submit"
-                    class="register-submit"
-                >
-                    Create Account
-                    <span aria-hidden="true">→</span>
-                </button>
+                <button appButton buttonName="Create Account"></button>
 
             </form>
 
@@ -160,9 +165,7 @@
             <p class="register-bottom-text">
                 Already have an account?
 
-                <a routerLink="/login" class="login-link">
-                    Sign in
-                </a>
+                <a routerLink="/login" class="login-link">Sign in</a>
             </p>
 
         </div>

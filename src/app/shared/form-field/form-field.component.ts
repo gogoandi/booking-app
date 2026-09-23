@@ -12,4 +12,10 @@ import { FormFieldModel } from './form-field.model';
 export class FormFieldComponent {
     formField = input.required<FormFieldModel>();
     control = input.required<FormControl<string>>();
+
+    // Checks the password visibility
+    isPasswordVisible = false;
+    togglePasswordVisibility(): void {
+        this.isPasswordVisible = !this.isPasswordVisible;
+    }
 }
