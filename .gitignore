@@ -39,6 +39,7 @@ testem.log
 /typings
 __screenshots__/
 git_current_commit
+possible_todos.txt
 
 # System files
 .DS_Store

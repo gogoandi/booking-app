@@ -9,36 +9,48 @@
     border-radius: 11px;
     background: var(--blue-primary);
     box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
-    color: white;
+    color: #ffffff;
     font-size: 0.9rem;
     font-weight: 700;
     white-space: nowrap;
     text-decoration: none;
+    cursor: pointer;
     transition:
-    background-color 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
+        background-color 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        color 180ms ease,
+        opacity 180ms ease,
+        transform 180ms ease;
 }
-
 
 :host span {
-  font-size: 1.05rem;
-  transition: transform 180ms ease;
+    font-size: 1.05rem;
+    transition: transform 180ms ease;
 }
 
-:host:hover {
-  border-color: var(--blue-hover);
-  background: var(--blue-hover);
-  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.4);
-  transform: translateY(-2px);
+/* ENABLED HOVER */
+
+:host(:not(:disabled)):hover {
+    border-color: var(--blue-hover);
+    background: var(--blue-hover);
+    box-shadow: 0 14px 30px rgba(37, 99, 235, 0.4);
+    transform: translateY(-2px);
 }
 
-:host:hover span {
-  transform: translateX(3px);
+:host(:not(:disabled)):hover span {transform: translateX(3px);}
+
+/* ENABLED ACTIVE */
+:host(:not(:disabled)):active {
+    box-shadow: 0 7px 18px rgba(37, 99, 235, 0.28);
+    transform: translateY(0);
 }
 
-:host:active {
-  box-shadow: 0 7px 18px rgba(37, 99, 235, 0.28);
-  transform: translateY(0);
+/* ========================================
+   DISABLED STATE
+======================================== */
+
+:host(:disabled) {
+    cursor: not-allowed;
+    opacity: 0.25;
 }
