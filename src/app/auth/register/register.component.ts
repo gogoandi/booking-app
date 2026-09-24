@@ -129,7 +129,6 @@ export class RegisterComponent {
 
   //   Email conditions
   isEmailFocused = false;
-
   get showEmailError(): boolean {
     const email = this.registerForm.controls.registerEmail;
     return email.invalid && email.dirty && email.touched && !this.isEmailFocused;
@@ -150,28 +149,21 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    if (this.registerForm.invalid || this.isLoading()) {
-      return;
-    }
+    this.isLoading.set(true);
+    this.failedRegister.set('');
 
     const registerEmail = this.registerForm.controls.registerEmail.value;
     const registerPassword = this.registerForm.controls.registerPassword.value;
 
-    if (!registerEmail || !registerPassword) {
+    if (this.registerForm.invalid || (!registerEmail || !registerPassword)) {
       return;
     }
 
-    this.isLoading.set(true);
-    this.failedRegister.set('');
-
-    this.authService.signup(registerEmail, registerPassword).subscribe({
+    this.authService.authRequest('signUp', registerEmail, registerPassword).subscribe({
       next: (resData) => {
-        /** The response from the server after a user logs in or registers
-         * should never be logged to the console, as it may contain
-         * sensitive information such as tokens or passwords.
+        /** The response from the server after a user logs in or registers should never be logged to the console, as it may contain sensitive information such as tokens or passwords.
          *
-         * Although this is a demo application with no real user data,
-         * sensitive information should still not be logged.
+         Although this is a demo application with no real user data, sensitive information should still not be logged.
          */
         console.log('Registration successful:', resData);
         this.isLoading.set(false);
@@ -179,6 +171,7 @@ export class RegisterComponent {
       },
 
       error: (failedRegister) => {
+        console.log(failedRegister);
         this.failedRegister.set(failedRegister);
         this.isLoading.set(false);
       },

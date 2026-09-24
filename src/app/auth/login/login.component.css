@@ -65,7 +65,9 @@
 }
 
 
-/* BRAND */
+/* ========================================
+   BRAND
+======================================== */
 
 .login-brand {
     position: relative;
@@ -81,7 +83,9 @@
 }
 
 
-/* INTRO CONTENT */
+/* ========================================
+   INTRO CONTENT
+======================================== */
 
 .login-intro-content {
     position: relative;
@@ -119,7 +123,9 @@
 }
 
 
-/* FEATURES */
+/* ========================================
+   FEATURES
+======================================== */
 
 .login-features {
     display: flex;
@@ -151,7 +157,9 @@
 }
 
 
-/* FOOTER */
+/* ========================================
+   INTRO FOOTER
+======================================== */
 
 .login-intro-footer {
     position: relative;
@@ -179,7 +187,9 @@
 }
 
 
-/* BACK HOME */
+/* ========================================
+   BACK HOME
+======================================== */
 
 .back-home {
     display: inline-flex;
@@ -201,7 +211,9 @@
 }
 
 
-/* HEADING */
+/* ========================================
+   HEADING
+======================================== */
 
 .login-heading {
     margin-bottom: 38px;
@@ -284,12 +296,42 @@
     box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
 }
 
+
+/* ========================================
+   EMAIL VALIDATION ERROR
+======================================== */
+
+.loginEmail-error-wrapper {
+    display: grid;
+    margin-top: 10px;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+        grid-template-rows 0.3s ease,
+        opacity 0.25s ease,
+        transform 0.3s ease;
+}
+
+.loginEmail-error-wrapper.is-visible {
+    grid-template-rows: 1fr;
+
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .loginEmail-error {
+    min-height: 0;
+    overflow: hidden;
+
+    margin: 0;
+
     color: #dc2626;
     font-size: 12px;
     font-weight: 500;
-    margin-top: 10px;
+    line-height: 1.5;
 }
+
 
 /* ========================================
    BOTTOM CONTENT
@@ -317,15 +359,6 @@
 
 .login-bottom-text {
     margin: 0;
-    color: #64748b;
-    font-size: 13px;
-    line-height: 1.7;
-    text-align: center;
-}
-
-
-.login-bottom-text {
-    margin: 0;
     color: var(--text-muted);
     font-size: 14px;
     line-height: 1.7;
@@ -344,68 +377,132 @@
     text-decoration: underline;
 }
 
-/* FAILED LOGIN */
+
+/* ========================================
+   FAILED LOGIN
+======================================== */
+
 .failed-login {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  width: 100%;
-  padding: 14px 16px;
-  margin-bottom: 20px;
-  background: #fef2f2;
-  border: 1px solid #fecaca;
-  border-left: 4px solid #ef4444;
-  border-radius: 10px;
-  color: #991b1b;
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.05);
-  animation: errorSlideIn 250ms ease-out;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-left: 4px solid #ef4444;
+    border-radius: 10px;
+
+    color: #991b1b;
+
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.05);
+
+    animation: errorSlideIn 250ms ease-out both;
 }
 
 .failed-login-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  color: #dc2626;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 24px;
+    height: 24px;
+
+    color: #dc2626;
 }
 
 .failed-login-content {
-  flex: 1;
-  min-width: 0;
+    flex: 1;
+    min-width: 0;
 }
 
 .failed-login-content strong {
-  display: block;
-  margin-bottom: 4px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  line-height: 1.4;
+    display: block;
+    margin-bottom: 4px;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.4;
 }
 
 .failed-login-content p {
-  margin: 0;
-  font-size: 0.85rem;
-  font-weight: 400;
-  line-height: 1.6;
-  color: #b91c1c;
-  overflow-wrap: anywhere;
+    margin: 0;
+
+    font-size: 0.85rem;
+    font-weight: 400;
+    line-height: 1.6;
+
+    color: #b91c1c;
+
+    overflow-wrap: anywhere;
 }
 
-/* LOADING SPINNER */
+
+/* ========================================
+   LOADING SPINNER
+======================================== */
+
 .login-loading-spinner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(8px);
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 100;
+
+    background: rgba(255, 255, 255, 0.35);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+
+/* Email validation message slides downward */
+
+@keyframes emailErrorSlideDown {
+
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* Failed login alert */
+
+@keyframes errorSlideIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
 }
 
 
@@ -446,6 +543,7 @@
 
 }
 
+
 @media (max-width: 480px) {
 
     .login-intro {
@@ -471,6 +569,20 @@
 
     .login-heading h2 {
         font-size: 28px;
+    }
+
+}
+
+
+/* ========================================
+   REDUCED MOTION ACCESSIBILITY
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .loginEmail-error,
+    .failed-login {
+        animation: none;
     }
 
 }
