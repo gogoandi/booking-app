@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { ButtonComponent } from '../shared/button/button.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -9,4 +11,28 @@ import { RouterLink } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent {}
+export class HeaderComponent implements OnInit, OnDestroy {
+  isAuthenticated = signal(false);
+
+  private userSub!: Subscription;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {}
+
+  ngOnInit(): void {
+    this.userSub = this.authService.user.subscribe((user) => {
+      this.isAuthenticated.set(!!user);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.userSub.unsubscribe();
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+}

@@ -1,8 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Subject, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Subject, tap } from 'rxjs';
 import { throwError } from 'rxjs';
 import { UserModel } from './user.model';
+import { Router } from '@angular/router';
 
 interface AuthResponseData {
   kind: string;
@@ -17,9 +18,16 @@ interface AuthResponseData {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   apiKey = 'AIzaSyAX9IZo0WhxqQN5jWe-OWtaqDWMsMqvPtU';
-  constructor(private httpRequest: HttpClient) {}
-
-  user = new Subject<UserModel>();
+  constructor(
+    private httpRequest: HttpClient,
+    private router: Router,
+  ) {
+    if (typeof window !== 'undefined') {
+      this.autoLogin();
+    }
+  }
+  user = new BehaviorSubject<UserModel | null>(null);
+  private tokenExpirationTimer: any;
 
   // One method for both the signup and login request since the requests are almost identical(both require only email/password and both are of POST type). The only difference is the API endpoint which still only changes between 'signUp'  or 'signInWithPassword'
   authRequest(authType: 'signUp' | 'signInWithPassword', email: string, password: string) {
@@ -34,14 +42,37 @@ export class AuthService {
       )
       .pipe(
         catchError(this.handleError),
-        tap((resData) => {this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn)}),
+        tap((resData) => {
+          this.handleAuthentication(
+            resData.email,
+            resData.localId,
+            resData.idToken,
+            +resData.expiresIn,
+          );
+        }),
       );
   }
 
-  private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
-    const expirationDate = new Date(new Date().getTime() + +expiresIn * 1000);
+  private handleAuthentication(
+    email: string,
+    userId: string,
+    token: string,
+    expiresIn: number,
+  ): void {
+    const expirationDate = new Date(Date.now() + expiresIn * 1000);
     const user = new UserModel(email, userId, token, expirationDate);
     this.user.next(user);
+    this.autoLogout(expiresIn * 1000);
+
+    localStorage.setItem(
+      'userData',
+      JSON.stringify({
+        email,
+        userId,
+        token,
+        expirationDate: expirationDate.toISOString(),
+      }),
+    );
   }
 
   private handleError(errorResponse: HttpErrorResponse) {
@@ -68,5 +99,76 @@ export class AuthService {
     }
 
     return throwError(() => new Error(failedRequest));
+  }
+
+  autoLogin(): void {
+    const storedUser = localStorage.getItem('userData');
+
+    if (!storedUser) {
+      return;
+    }
+
+    try {
+      const userData = JSON.parse(storedUser);
+
+      // Reconstruct expiration date from localStorage
+      const expirationDate = new Date(userData.expirationDate);
+
+      // Calculate remaining token lifetime
+      const expirationDuration = expirationDate.getTime() - Date.now();
+
+      // Check expiration date before creating the user
+      if (!Number.isFinite(expirationDuration) || expirationDuration <= 0) {
+        this.logout();
+        return;
+      }
+
+      // Reconstruct UserModel
+      const user = new UserModel(userData.email, userData.userId, userData.token, expirationDate);
+
+      // Check whether the token exists and is valid
+      if (!user.getToken) {
+        this.logout();
+        return;
+      }
+
+      // Restore authentication state
+      this.user.next(user);
+
+      // Restart automatic logout timer
+      this.autoLogout(expirationDuration);
+    } catch (error) {
+      console.error('Failed to restore user session:', error);
+
+      this.logout();
+    }
+  }
+
+  logout() {
+    this.user.next(null);
+    localStorage.removeItem('userData');
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
+    this.router.navigate(['/login']);
+  }
+
+  autoLogout(expirationDuration: number): void {
+    // Clear existing timer
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+
+    // Prevent invalid durations
+    if (!Number.isFinite(expirationDuration) || expirationDuration <= 0) {
+      this.logout();
+      return;
+    }
+
+    // Start automatic logout timer
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
   }
 }

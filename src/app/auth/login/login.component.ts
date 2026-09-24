@@ -2,9 +2,10 @@ import { Component, signal } from '@angular/core';
 import { ButtonComponent } from '../../shared/button/button.component';
 import { FormFieldComponent } from '../../shared/form-field/form-field.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,10 @@ import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-sp
 })
 export class LoginComponent {
   isLoading = signal(false);
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {}
   failedLogin = signal('');
 
   loginForm = new FormGroup({
@@ -60,33 +64,35 @@ export class LoginComponent {
     return '';
   }
 
-  onSubmit() {
-    this.isLoading.set(true);
-    this.failedLogin.set('');
+  onSubmit(): void {
+    if (this.loginForm.invalid || this.isLoading()) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
 
     const loginEmail = this.loginForm.controls.loginEmail.value;
     const loginPassword = this.loginForm.controls.loginPassword.value;
 
-    if (this.loginForm.invalid || !loginEmail || !loginPassword) {
-      return;
-    }    
+    this.failedLogin.set('');
+    this.isLoading.set(true);
 
-    this.authService.authRequest('signInWithPassword', loginEmail, loginPassword).subscribe({
-      next: (resData) => {
-        /** The response from the server after a user logs in or registers should never be logged to the console, as it may contain sensitive information such as tokens or passwords.
-         *
-         Although this is a demo application with no real user data, sensitive information should still not be logged.
-         */
-        console.log('Login successful:', resData);
-        this.isLoading.set(false);
-        this.loginForm.reset();
-      },
+    this.authService
+      .authRequest('signInWithPassword', loginEmail, loginPassword)
+      .pipe(
+        finalize(() => {
+          this.isLoading.set(false);
+        }),
+      )
+      .subscribe({
+        next: () => {
+          this.loginForm.reset();
 
-      error: (failedLogin) => {
-        console.log(failedLogin);
-        this.failedLogin.set(failedLogin);
-        this.isLoading.set(false);
-      },
-    });
+          this.router.navigate(['/dashboard']);
+        },
+
+        error: (error: Error) => {
+          this.failedLogin.set(error.message);
+        },
+      });
   }
 }
