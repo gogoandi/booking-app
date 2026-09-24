@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs';
+import { catchError, Subject, tap } from 'rxjs';
 import { throwError } from 'rxjs';
+import { UserModel } from './user.model';
 
 interface AuthResponseData {
   kind: string;
@@ -18,6 +19,8 @@ export class AuthService {
   apiKey = 'AIzaSyAX9IZo0WhxqQN5jWe-OWtaqDWMsMqvPtU';
   constructor(private httpRequest: HttpClient) {}
 
+  user = new Subject<UserModel>();
+
   // One method for both the signup and login request since the requests are almost identical(both require only email/password and both are of POST type). The only difference is the API endpoint which still only changes between 'signUp'  or 'signInWithPassword'
   authRequest(authType: 'signUp' | 'signInWithPassword', email: string, password: string) {
     return this.httpRequest
@@ -29,7 +32,16 @@ export class AuthService {
           returnSecureToken: true,
         },
       )
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError(this.handleError),
+        tap((resData) => {this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn)}),
+      );
+  }
+
+  private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
+    const expirationDate = new Date(new Date().getTime() + +expiresIn * 1000);
+    const user = new UserModel(email, userId, token, expirationDate);
+    this.user.next(user);
   }
 
   private handleError(errorResponse: HttpErrorResponse) {
