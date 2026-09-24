@@ -55,13 +55,9 @@
             </a>
 
             <div class="register-heading">
-
                 <span class="register-subtitle">JOIN BOOKING</span>
-
                 <h2>Create your account</h2>
-
                 <p>Fill in your details below to get started with your next adventure.</p>
-
             </div>
 
 
@@ -83,7 +79,7 @@
             name: 'email',
             label: 'Email Address',
             type: 'email'
-        }" [control]="registerForm.controls.email" />
+        }" [control]="registerForm.controls.registerEmail" />
 
                     <div class="register-email-error-wrapper" [class.is-visible]="showEmailError"
                         [attr.aria-hidden]="!showEmailError">
@@ -102,7 +98,7 @@
             name: 'password',
             label: 'Password',
             type: 'password'
-        }" [control]="registerForm.controls.password" />
+        }" [control]="registerForm.controls.registerPassword" />
 
                     @let requirements = passwordRequirements;
 
@@ -154,6 +150,24 @@
                 <!-- SUBMIT -->
                 <button appButton buttonName="Create Account" [disabled]=!registerForm.valid></button>
 
+                @if (failedRegister()) {
+                <div class="failed-register" role="alert">
+                    <span class="failed-register-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                    </span>
+
+                    <div class="failed-register-content">
+                        <strong>Registration failed</strong>
+                        <p>{{ failedRegister() }}</p>
+                    </div>
+                </div>
+                }
+
             </form>
 
 
@@ -169,6 +183,12 @@
             </p>
 
         </div>
+
+        @if (isLoading()) {
+        <div class="register-loading-spinner">
+            <app-loading-spinner />
+        </div>
+        }
 
     </div>
 

@@ -21,5 +21,4 @@ export class AppComponent {
         return authRoutes.includes(this.router.url.split('?')[0]);
     }
 
-
 }

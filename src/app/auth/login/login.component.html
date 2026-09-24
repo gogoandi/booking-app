@@ -40,7 +40,7 @@
     <!-- RIGHT SIDE -->
     <div class="login-form-section">
 
-        <div class="login-form-container">
+        <div class="login-form-container position-relative">
 
             <a routerLink="/" class="back-home"><span aria-hidden="true">←</span>Back to homepage</a>
 
@@ -74,7 +74,30 @@
 
                 <button appButton buttonName="Sign In"></button>
 
+                @if (failedLogin()) {
+                <div class="failed-login" role="alert">
+                    <span class="failed-login-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                    </span>
+
+                    <div class="failed-login-content">
+                        <strong>Login failed</strong>
+                        <p>{{ failedLogin() }}</p>
+                    </div>
+                </div>
+                }
             </form>
+
+            @if (isLoading()) {
+            <div class="login-loading-spinner">
+                <app-loading-spinner />
+            </div>
+            }
 
 
             <div class="login-divider">
