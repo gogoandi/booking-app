@@ -42,23 +42,21 @@ input::placeholder {
   color: #94a3b8;
 }
 
-input[type="date"] {
+input[type='date'] {
   color-scheme: light;
 }
 
 /* Default input transition */
 .form-field input {
-    transition:
-        border-color 0.2s ease,
-        background-color 0.2s ease,
-        box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 /* Invalid input after user has edited and left the field */
-.form-field input.ng-invalid.ng-touched:not(:focus),
-.form-field input.ng-invalid.ng-dirty.ng-touched:not(:focus),
-
-.form-field textarea.ng-invalid.ng-touched:not(:focus){
+/* .form-field input.ng-invalid.ng-touched:not(:focus), */
+.form-field input.ng-invalid.ng-dirty.ng-touched:not(:focus) {
     border: 1px solid #ef4444;
     background-color: #fffafa;
     transition:
@@ -68,66 +66,54 @@ input[type="date"] {
 }
 
 
-
-
-
 /* Input wrapper */
-
 .input-wrapper {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
-
 .input-wrapper input {
-    width: 100%;
-    box-sizing: border-box;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Leave room for the toggle */
-
 .input-wrapper:has(.password-toggle) input {
-    padding-right: 75px;
+  padding-right: 75px;
 }
 
 /* Show / Hide button */
-
 .password-toggle {
-    position: absolute;
-    top: 50%;
-    right: 14px;
-    transform: translateY(-50%);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 32px;
-    height: 32px;
-    padding: 0;
-
-    border: none;
-    border-radius: 6px;
-    background: transparent;
-
-    color: var(--text-muted);
-    cursor: pointer;
-
-    transition:
-        color 0.2s ease,
-        background-color 0.2s ease;
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .password-toggle:hover {
-    color: var(--blue-primary);
-    background-color: var(--blue-pale);
+  color: var(--blue-primary);
+  background-color: var(--blue-pale);
 }
 
 .password-toggle:focus-visible {
-    outline: 2px solid var(--blue-primary);
-    outline-offset: 2px;
+  outline: 2px solid var(--blue-primary);
+  outline-offset: 2px;
 }
 
 /* Make room for the eye icon */
 .input-wrapper:has(.password-toggle) input {
-    padding-right: 55px;
+  padding-right: 55px;
 }

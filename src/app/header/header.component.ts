@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = signal(false);
   isAccountMenuOpen = signal(false);
   private userSub!: Subscription;
+  readonly dashboardPath = '/dashboard';
 
   constructor(
     private authService: AuthService,
@@ -37,7 +38,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   get isDashboard(): boolean {
-    return this.router.url === '/dashboard';
+    return this.router.url.startsWith('/dashboard') ;
   }
 
   toggleAccountMenu(): void {

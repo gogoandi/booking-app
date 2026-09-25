@@ -1,0 +1,385 @@
+/* ========================================
+   PAGE HEADER
+======================================== */
+
+.user-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.user-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    color: var(--blue-primary);
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.user-header h1 {
+    margin: 0 0 12px;
+
+    color: var(--navy);
+
+    font-size: clamp(26px, 3vw, 34px);
+    font-weight: 750;
+    letter-spacing: -1px;
+}
+
+.user-header p {
+    margin: 0;
+
+    color: var(--text-muted);
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.user-header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 55px;
+    height: 55px;
+    flex-shrink: 0;
+
+    border: 1px solid #bfdbfe;
+    border-radius: 15px;
+
+    background: var(--blue-pale);
+    color: var(--blue-primary);
+}
+
+
+/* ========================================
+   PROFILE CARD
+======================================== */
+
+.user-profile-card {
+    padding: 35px;
+
+    border: 1px solid var(--border);
+    border-radius: 20px;
+
+    background: #ffffff;
+
+    box-shadow: 0 10px 35px rgba(15, 23, 42, 0.035);
+}
+
+.user-profile-top {
+    display: flex;
+    align-items: center;
+
+    gap: 22px;
+}
+
+.user-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+
+    border: 4px solid #dbeafe;
+    border-radius: 22px;
+
+    background: linear-gradient(
+        135deg,
+        var(--blue-primary),
+        var(--blue-dark)
+    );
+
+    color: #ffffff;
+
+    font-size: 32px;
+    font-weight: 750;
+
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.18);
+}
+
+.user-profile-identity {
+    min-width: 0;
+}
+
+.user-profile-identity h2 {
+    margin: 0 0 6px;
+
+    color: var(--navy);
+
+    font-size: 22px;
+    font-weight: 750;
+    letter-spacing: -0.5px;
+}
+
+.user-profile-identity > p {
+    margin: 0 0 12px;
+
+    color: var(--text-muted);
+
+    font-size: 13px;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* ========================================
+   ACCOUNT STATUS
+======================================== */
+
+.user-status {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 6px 11px;
+
+    border: 1px solid #bbf7d0;
+    border-radius: 20px;
+
+    background: #f0fdf4;
+    color: #15803d;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.user-status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #16a34a;
+}
+
+
+/* ========================================
+   DIVIDER
+======================================== */
+
+.user-profile-divider {
+    height: 1px;
+
+    margin: 32px 0;
+
+    background: #e2e8f0;
+}
+
+
+/* ========================================
+   ACCOUNT INFORMATION
+======================================== */
+
+.user-details-heading {
+    margin-bottom: 25px;
+}
+
+.user-details-heading h3 {
+    margin: 0 0 8px;
+
+    color: var(--navy);
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.user-details-heading p {
+    margin: 0;
+
+    color: var(--text-muted);
+
+    font-size: 13px;
+}
+
+.user-details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+.user-detail {
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+
+    min-width: 0;
+    padding: 20px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 13px;
+
+    background: #f8fafc;
+}
+
+.user-detail-label {
+    color: var(--text-muted);
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.user-detail strong {
+    color: var(--navy);
+
+    font-size: 13px;
+    font-weight: 650;
+
+    overflow-wrap: anywhere;
+}
+
+.user-detail .user-id {
+    color: var(--text-muted);
+
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.user-detail .user-active-text {
+    color: #16a34a;
+}
+
+
+/* ========================================
+   SUPPORT CARD
+======================================== */
+
+.user-support-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-top: 25px;
+    padding: 27px 30px;
+
+    border: 1px solid #bfdbfe;
+    border-radius: 17px;
+
+    background: linear-gradient(
+        135deg,
+        #eff6ff,
+        #dbeafe
+    );
+}
+
+.user-support-content {
+    display: flex;
+    align-items: center;
+
+    gap: 17px;
+}
+
+.user-support-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+
+    border-radius: 13px;
+
+    background: #ffffff;
+    color: var(--blue-primary);
+}
+
+.user-support-content h3 {
+    margin: 0 0 7px;
+
+    color: var(--blue-dark);
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.user-support-content p {
+    margin: 0;
+
+    color: #475569;
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 767px) {
+
+    .dashboard-user {
+        padding: 20px;
+    }
+
+    .user-header {
+        margin-bottom: 25px;
+    }
+
+    .user-header-icon {
+        width: 46px;
+        height: 46px;
+    }
+
+    .user-profile-card {
+        padding: 25px;
+        border-radius: 16px;
+    }
+
+    .user-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .user-support-card {
+        flex-direction: column;
+        align-items: stretch;
+
+        padding: 25px;
+    }
+
+    .user-support-card a[appButton] {
+        align-self: flex-start;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .user-header-icon {
+        display: none;
+    }
+
+    .user-profile-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .user-profile-identity h2 {
+        font-size: 20px;
+    }
+
+    .user-support-content {
+        align-items: flex-start;
+    }
+
+    .user-support-card a[appButton] {
+        width: 100%;
+    }
+
+}
