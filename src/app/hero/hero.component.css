@@ -1,6 +1,4 @@
-:host {
-  display: block;
-}
+:host {display: block;}
 
 *,
 *::before,
@@ -15,7 +13,7 @@
   min-height: clamp(620px, 85vh, 820px);
   overflow: hidden;
   color: var(--white);
-  padding: 120px 0 55px;
+  padding-top: 150px;
 }
 
 .hero-background,

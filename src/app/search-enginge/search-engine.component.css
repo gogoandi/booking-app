@@ -22,7 +22,7 @@
     0 8px 24px rgba(37, 99, 235, 0.08);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  transform: translateY(-100px);
+  transform: translateY(-75px);
 }
 
 .search-engine-heading {

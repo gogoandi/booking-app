@@ -7,18 +7,145 @@
 
             <nav class="header-menu" aria-label="Main navigation">
                 <ul>
-                    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+                    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+                    </li>
                     <li><a routerLink="about" routerLinkActive="active">About</a></li>
                     <li><a routerLink="contact" routerLinkActive="active">Contact</a></li>
                 </ul>
             </nav>
 
             <div class="header-actions">
+
                 @if (isAuthenticated()) {
-                <a appButton routerLink="/dashboard" buttonName="Dashboard"></a>
-                <button appButton [buttonName]="'Logout'" (click)="onLogout()"></button>
+
+                <div class="account-menu-wrapper" (click)="$event.stopPropagation()">
+
+                    <!-- USER ICON BUTTON -->
+
+                    <button type="button" class="account-trigger" aria-label="Account menu"
+                        aria-controls="account-dropdown" aria-haspopup="true" [attr.aria-expanded]="isAccountMenuOpen()"
+                        [class.is-open]="isAccountMenuOpen()" (click)="toggleAccountMenu()">
+
+                        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="8" r="4" />
+                            <path d="M4 21v-2a8 8 0 0 1 16 0v2" />
+                        </svg>
+
+                        <svg class="account-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            aria-hidden="true">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+
+                    </button>
+
+
+                    <!-- DROPDOWN MENU -->
+
+                    @if (isAccountMenuOpen()) {
+
+                    <nav id="account-dropdown" class="account-dropdown" aria-label="Account options">
+
+                        <div class="account-dropdown-heading">
+                            <span class="account-dropdown-avatar">
+
+                                <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
+                                    aria-hidden="true">
+                                    <circle cx="12" cy="8" r="4" />
+                                    <path d="M4 21v-2a8 8 0 0 1 16 0v2" />
+                                </svg>
+
+                            </span>
+
+                            <div class="account-dropdown-heading-text">
+                                <strong>My Account</strong>
+                                <span>Manage your experience</span>
+                            </div>
+                        </div>
+
+
+                        <div class="account-dropdown-divider"></div>
+
+
+                        <!-- DASHBOARD -->
+
+                        <a routerLink="/dashboard" routerLinkActive="active" class="account-dropdown-item"
+                            (click)="closeAccountMenu()">
+
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3" y="3" width="7" height="7" rx="1" />
+                                <rect x="14" y="3" width="7" height="7" rx="1" />
+                                <rect x="3" y="14" width="7" height="7" rx="1" />
+                                <rect x="14" y="14" width="7" height="7" rx="1" />
+                            </svg>
+
+                            <span>Dashboard</span>
+
+                        </a>
+
+
+                        <!-- EXPLORE HOTELS -->
+
+                        <a routerLink="/" class="account-dropdown-item" (click)="closeAccountMenu()">
+
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="m3 9 9-7 9 7v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9z" />
+                                <polyline points="9 21 9 12 15 12 15 21" />
+                            </svg>
+
+                            <span>Explore Hotels</span>
+
+                        </a>
+
+
+                        <!-- CONTACT -->
+
+                        <a routerLink="/contact" class="account-dropdown-item" (click)="closeAccountMenu()">
+
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="2" y="4" width="20" height="16" rx="2" />
+                                <path d="m22 7-10 6L2 7" />
+                            </svg>
+
+                            <span>Contact</span>
+
+                        </a>
+
+
+                        <div class="account-dropdown-divider"></div>
+
+
+                        <!-- LOGOUT -->
+
+                        <button type="button" class="account-dropdown-item account-dropdown-logout"
+                            (click)="onLogout(); closeAccountMenu()">
+
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                <polyline points="16 17 21 12 16 7" />
+                                <line x1="21" y1="12" x2="9" y2="12" />
+                            </svg>
+
+                            <span>Logout</span>
+
+                        </button>
+
+                    </nav>
+
+                    }
+
+                </div>
+
                 } @else {
+
                 <a appButton routerLink="/login" buttonName="Login"></a>
+
                 }
 
             </div>

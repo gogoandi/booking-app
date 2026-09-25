@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, signal } from '@angular/core';
 import { ButtonComponent } from '../shared/button/button.component';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = signal(false);
+  isAccountMenuOpen = signal(false);
   private userSub!: Subscription;
 
   constructor(
@@ -35,7 +36,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigate(['/login']);
   }
 
-   get isDashboard(): boolean {
+  get isDashboard(): boolean {
     return this.router.url === '/dashboard';
+  }
+
+  toggleAccountMenu(): void {
+    this.isAccountMenuOpen.update((isOpen) => !isOpen);
+  }
+
+  closeAccountMenu(): void {
+    this.isAccountMenuOpen.set(false);
+  }
+
+  @HostListener('document:click')
+  onDocumentClick(): void {
+    this.closeAccountMenu();
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscapeKey(): void {
+    this.closeAccountMenu();
   }
 }
