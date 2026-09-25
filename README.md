@@ -36,23 +36,52 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
+## Test organization
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+All tests live under `tests/`, grouped by test type and feature:
+
+```text
+tests/
+  unit/
+    auth/                  # Auth service, guard, user model, login, registration
+    header/                # Header actions and session changes
+    shared/                # Shared form fields
+  integration/
+    routing/               # Application routes and authentication flow
+  e2e/                     # Browser authentication journeys
+```
+
+Angular's test discovery patterns in `angular.json` are relative to `src/`, so they
+use `../tests/`. TypeScript's includes in `tsconfig.spec.json` are relative to the
+repository root. Playwright discovers browser tests in `tests/e2e/`.
+
+## Running unit and integration tests
+
+To execute unit and integration tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
 
 ```bash
-ng test
+npm test -- --watch=false
 ```
 
 ## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
+Install Playwright's Chromium browser once after installing npm dependencies:
 
 ```bash
-ng e2e
+npx playwright install chromium
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Run the browser tests:
+
+```bash
+npm run test:e2e
+```
+
+Playwright starts and stops a dedicated development server at `http://127.0.0.1:4201`.
+These tests cover login, session restoration after refresh, logout, protected dashboard
+access, failed-login retries, and registration. Firebase responses are mocked, so no
+real credentials or running backend are required. Hotel functionality is excluded.
+Failure screenshots and traces are saved in the ignored `test-results/` directory.
 
 ## Additional Resources
 

@@ -79,7 +79,7 @@ export class RegisterComponent {
     const password = this.registerForm.controls.registerPassword.value;
 
     return {
-      length: password.length > 8,
+      length: password.length >= 8,
       letterCase: /[a-z]/.test(password) && /[A-Z]/.test(password),
       specialCharacter: /[^a-zA-Z0-9\s]/.test(password),
       number: /\d/.test(password),
@@ -149,15 +149,15 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    this.isLoading.set(true);
-    this.failedRegister.set('');
-
     const registerEmail = this.registerForm.controls.registerEmail.value;
     const registerPassword = this.registerForm.controls.registerPassword.value;
 
-    if (this.registerForm.invalid || (!registerEmail || !registerPassword)) {
+    if (this.registerForm.invalid || this.isLoading() || !registerEmail || !registerPassword) {
       return;
     }
+
+    this.isLoading.set(true);
+    this.failedRegister.set('');
 
     this.authService.authRequest('signUp', registerEmail, registerPassword).subscribe({
       next: (resData) => {
@@ -170,9 +170,9 @@ export class RegisterComponent {
         this.registerForm.reset();
       },
 
-      error: (failedRegister) => {
+      error: (failedRegister: Error) => {
         console.log(failedRegister);
-        this.failedRegister.set(failedRegister);
+        this.failedRegister.set(failedRegister.message);
         this.isLoading.set(false);
       },
     });
