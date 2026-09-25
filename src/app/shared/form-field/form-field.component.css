@@ -55,7 +55,10 @@ input[type="date"] {
 }
 
 /* Invalid input after user has edited and left the field */
-.form-field input.ng-invalid.ng-dirty.ng-touched:not(:focus) {
+.form-field input.ng-invalid.ng-touched:not(:focus),
+.form-field input.ng-invalid.ng-dirty.ng-touched:not(:focus),
+
+.form-field textarea.ng-invalid.ng-touched:not(:focus){
     border: 1px solid #ef4444;
     background-color: #fffafa;
     transition:

@@ -1,0 +1,239 @@
+<main class="contact-page">
+
+    <!-- ========================================
+         CONTACT HERO
+    ======================================== -->
+
+    <section class="contact-hero">
+        <div class="container">
+            <div class="contact-hero-content">
+
+                <span class="contact-eyebrow">GET IN TOUCH</span>
+                <h1>We'd love to<span> hear from you.</span></h1>
+                <p>Have a question about our platform, need help finding your next stay, or simply want to share your
+                    thoughts? We're always happy to hear from you.</p>
+
+                <div class="contact-hero-actions">
+                    <a appButton routerLink="/" buttonName="Explore Hotels" [hasWhiteBg]="true"></a>
+                    <a href="/contact/#contact-form" class="contact-hero-secondary">Send a Message<span>↓</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-hero-decoration">
+                <div class="contact-decoration-circle">
+                    <svg width="125" height="125" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="4" width="20" height="16" rx="2" />
+                        <path d="m22 7-10 6L2 7" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================
+         CONTACT CONTENT
+    ======================================== -->
+
+    <section class="contact-content">
+        <div class="container">
+            <div class="contact-grid">
+
+                <!-- LEFT SIDE -->
+                <div class="contact-information">
+                    <span class="contact-section-label">LET'S CONNECT</span>
+
+                    <h2>Let's start a<span> conversation.</span></h2>
+                    <p class="contact-intro">Whether you're planning your next adventure or looking for help with your
+                        account, we'd love to know how we can help.</p>
+
+                    <!-- CONTACT CARDS -->
+                    <div class="contact-info-cards">
+
+                        <!-- GENERAL QUESTIONS -->
+                        <div class="contact-info-card">
+                            <div class="contact-info-icon">
+
+                                <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
+                                    aria-hidden="true">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4" />
+                                    <path d="M12 17h.01" />
+                                </svg>
+                            </div>
+
+                            <div class="contact-info-text">
+                                <h3>General Inquiries</h3>
+                                <p>Have a question about Booking App or how our platform works? Send us a message.</p>
+                            </div>
+                        </div>
+
+                        <!-- ACCOUNT SUPPORT -->
+                        <div class="contact-info-card">
+                            <div class="contact-info-icon">
+                                <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
+                                    aria-hidden="true">
+                                    <circle cx="12" cy="8" r="4" />
+                                    <path d="M4 21v-2a8 8 0 0 1 16 0v2" />
+                                </svg>
+                            </div>
+
+                            <div class="contact-info-text">
+                                <h3>Account Support</h3>
+                                <p>Need help with your account, registration, or signing in? Tell us what's happening.</p>
+                            </div>
+                        </div>
+
+                        <!-- FEEDBACK -->
+                        <div class="contact-info-card">
+                            <div class="contact-info-icon">
+
+                                <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8
+                                           8.5 8.5 0 0 1-7.6 4.7
+                                           8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7
+                                           a8.38 8.38 0 0 1-.9-3.8
+                                           8.5 8.5 0 0 1 4.7-7.6
+                                           8.38 8.38 0 0 1 3.8-.9h.5
+                                           a8.48 8.48 0 0 1 8 8v.5z" />
+                                </svg>
+                            </div>
+
+                            <div class="contact-info-text">
+                                <h3>Share Your Feedback</h3>
+                                <p>Have an idea or suggestion? Your feedback helps us improve the experience for travelers.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HELP CARD -->
+                    <div class="contact-help-card">
+                        <span class="contact-help-icon">✦</span>
+                        <div>
+                            <h3>Looking for your next stay?</h3>
+                            <p>Explore available hotels and discover your next destination.</p>
+                            <a routerLink="/">Explore Hotels<span>→</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================
+                     CONTACT FORM
+                ======================================== -->
+
+                <div class="contact-form-card" id="contact-form">
+                    <div class="contact-form-heading">
+                        <span class="contact-form-label">SEND US A MESSAGE</span>
+                        <h2>How can we help?</h2>
+                        <p>Fill out the form below and tell us a little about what you need.</p>
+                    </div>
+
+                    <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+
+                        <!-- NAME AND EMAIL -->
+
+                        <div class="contact-form-row">
+
+                            <div class="contact-field">
+                                <app-form-field [formField]="{
+                                        name: 'contactName',
+                                        label: 'Full Name *',
+                                        type: 'text'
+                                    }" [control]="contactForm.controls.contactName" />
+
+                                @if (checkContactFormFieldRequired(contactForm.controls.contactName)) {
+                                <p class="contact-field-error">Please enter your full name.</p>
+                                }
+                            </div>
+
+                            <div class="contact-field">
+                                <app-form-field [formField]="{
+                                        name: 'contactEmail',
+                                        label: 'Email Address *',
+                                        type: 'email'
+                                    }" [control]="contactForm.controls.contactEmail" />
+
+                                @if (checkContactFormFieldRequired(contactForm.controls.contactEmail)) {
+
+                                <p class="contact-field-error">
+                                    @if (contactForm.controls.contactEmail.hasError('required')) {
+                                    Email address is required.
+                                    } @else {
+                                    Please enter a valid email address.
+                                    }
+                                </p>
+                                }
+
+                            </div>
+                        </div>
+
+                        <!-- SUBJECT -->
+
+                        <div class="contact-field">
+                            <app-form-field [formField]="{
+                                    name: 'contactSubject',
+                                    label: 'Subject *',
+                                    type: 'text'
+                                }" [control]="contactForm.controls.contactSubject" />
+
+                            @if (checkContactFormFieldRequired(contactForm.controls.contactSubject)) {
+                            <p class="contact-field-error">Please enter a subject.</p>
+                            }
+                        </div>
+
+                        <!-- MESSAGE -->
+                        <div class="contact-message-field">
+                            <label for="contactMessage">Your Message *</label>
+                            <textarea id="contactMessage" name="contactMessage" rows="6"
+                                placeholder="Tell us how we can help you..."
+                                [formControl]="contactForm.controls.contactMessage"></textarea>
+
+                            @if (checkContactFormFieldRequired(contactForm.controls.contactMessage)) {
+
+                            <p class="contact-field-error">
+
+                                @if (contactForm.controls.contactMessage.hasError('required')) {
+                                Please enter your message.
+                                } @else {
+                                Your message must contain at least 10 characters.
+                                }
+
+                            </p>
+
+                            }
+
+                        </div>
+
+                        <!-- SUBMIT -->
+
+                        <div class="contact-form-bottom">
+                            <p>Please do not include passwords or payment information in your message.</p>
+                            <button appButton type="submit" buttonName="Send Message" [disabled]="contactForm.invalid"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================
+         CLOSING SECTION
+    ======================================== -->
+
+    <section class="contact-closing">
+
+        <div class="container">
+            <div class="contact-closing-content">
+                <span class="contact-section-label">DISCOVER MORE</span>
+                <h2>Your next journey<span>starts here.</span></h2>
+                <p>Discover places to stay, explore beautiful destinations, and start planning your next adventure.</p>
+                <a appButton routerLink="/" buttonName="Explore Hotels"></a>
+            </div>
+        </div>
+    </section>
+</main>

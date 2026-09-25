@@ -1,19 +1,18 @@
 import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { ButtonComponent } from '../shared/button/button.component';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
-  imports: [ButtonComponent, RouterLink],
+  imports: [ButtonComponent, RouterLink, RouterLinkActive],
   standalone: true,
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = signal(false);
-
   private userSub!: Subscription;
 
   constructor(
@@ -34,5 +33,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onLogout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+   get isDashboard(): boolean {
+    return this.router.url === '/dashboard';
   }
 }

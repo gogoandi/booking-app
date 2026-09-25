@@ -8,7 +8,8 @@
 
         <input [id]="formField().name" [name]="formField().name"
             [type]="formField().type === 'password' && isPasswordVisible ? 'text' : formField().type"
-            [formControl]="control()" [attr.min]="formField().min ?? null" />
+            [formControl]="control()" [attr.min]="formField().min ?? null" (copy)="preventPasswordClipboard($event)"
+            (cut)="preventPasswordClipboard($event)" (paste)="preventPasswordClipboard($event)" />
 
         @if (formField().type === 'password') {
         <button type="button" class="password-toggle" (click)="togglePasswordVisibility()"

@@ -1,20 +1,31 @@
+/* ========================================
+   DEFAULT BUTTON
+======================================== */
+
 :host {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 9px;
+
     min-height: 50px;
     padding: 0 20px;
+
     border: 1px solid var(--blue-primary);
     border-radius: 11px;
+
     background: var(--blue-primary);
     box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+
     color: #ffffff;
+
     font-size: 0.9rem;
     font-weight: 700;
+
     white-space: nowrap;
     text-decoration: none;
     cursor: pointer;
+
     transition:
         background-color 180ms ease,
         border-color 180ms ease,
@@ -29,22 +40,78 @@
     transition: transform 180ms ease;
 }
 
-/* ENABLED HOVER */
+
+/* ========================================
+   DEFAULT BUTTON HOVER
+======================================== */
 
 :host(:not(:disabled)):hover {
     border-color: var(--blue-hover);
     background: var(--blue-hover);
+
     box-shadow: 0 14px 30px rgba(37, 99, 235, 0.4);
+
     transform: translateY(-2px);
 }
 
-:host(:not(:disabled)):hover span {transform: translateX(3px);}
+:host(:not(:disabled)):hover span {
+    transform: translateX(3px);
+}
 
-/* ENABLED ACTIVE */
+
+/* ========================================
+   DEFAULT BUTTON ACTIVE
+======================================== */
+
 :host(:not(:disabled)):active {
     box-shadow: 0 7px 18px rgba(37, 99, 235, 0.28);
     transform: translateY(0);
 }
+
+
+/* ========================================
+   WHITE BACKGROUND VARIATION
+======================================== */
+
+:host(.white-bg) {
+    border-color: #ffffff;
+
+    background: #ffffff;
+    color: var(--blue-primary);
+
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+}
+
+
+/* WHITE BUTTON HOVER */
+
+:host(.white-bg:not(:disabled)):hover {
+    border-color: var(--blue-pale);
+
+    background: var(--blue-pale);
+    color: var(--blue-hover);
+
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.18);
+
+    transform: translateY(-2px);
+}
+
+:host(.white-bg:not(:disabled)):hover span {
+    transform: translateX(3px);
+}
+
+
+/* WHITE BUTTON ACTIVE */
+
+:host(.white-bg:not(:disabled)):active {
+    background: #bfdbfe;
+    border-color: #bfdbfe;
+
+    box-shadow: 0 7px 18px rgba(15, 23, 42, 0.12);
+
+    transform: translateY(0);
+}
+
 
 /* ========================================
    DISABLED STATE
@@ -53,4 +120,7 @@
 :host(:disabled) {
     cursor: not-allowed;
     opacity: 0.25;
+
+    box-shadow: none;
+    transform: none;
 }

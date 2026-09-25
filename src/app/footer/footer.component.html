@@ -1,7 +1,81 @@
 <footer class="footer">
+
     <div class="container">
-        <div class="footer-logo">
-            <img src="logo.png" alt="Logo" />
+
+        <!-- FOOTER MAIN -->
+        <div class="footer-main">
+
+            <!-- BRAND -->
+            <div class="footer-brand">
+
+                <a routerLink="/" class="footer-logo"><img src="logo.png" alt="Booking App Logo" /></a>
+                <p>Discover amazing destinations, find your perfect stay, and make every journey unforgettable.</p>
+                <div class="footer-brand-badge">
+                    <span class="badge-dot"></span>
+                    Your journey starts here
+                </div>
+
+            </div>
+
+
+            <!-- EXPLORE -->
+            <div class="footer-column">
+
+                <h3>Explore</h3>
+
+                <ul>
+                    <li><a routerLink="/">Home</a></li>
+                    <li><a routerLink="/">Explore Hotels</a></li>
+                </ul>
+
+            </div>
+
+
+            <!-- ACCOUNT -->
+            <div class="footer-column">
+
+                <h3>Your Account</h3>
+
+                <ul>
+                    @if (isAuthenticated()) {
+                        <li><a routerLink="/dashboard">Dashboard</a></li>
+                        <li><button type="button" class="footer-text-button" (click)="onLogout()">Logout</button></li>
+                    } @else {
+                        <li><a routerLink="/login">Login</a></li>
+                        <li><a routerLink="/register">Create an Account</a></li>
+                    }
+                </ul>
+
+            </div>
+
+
+            <!-- CTA -->
+            <div class="footer-cta">
+
+                <span class="footer-cta-label">READY TO EXPLORE?</span>
+                <h3>Your next adventure awaits.</h3>
+                <p>Find a place that feels just right for your next trip.</p>
+                <a routerLink="/" class="footer-cta-button" appButton buttonName="Find Your Stay"></a>
+
+            </div>
+
         </div>
+
+
+        <!-- FOOTER BOTTOM -->
+        <div class="footer-bottom">
+
+            <p>© {{ currentYear }} Booking App. All rights reserved.</p>
+
+            <div class="footer-bottom-right">
+
+                <span>Made for memorable journeys.</span>
+                <a routerLink="/" class="back-to-home">Back to Home<span>↑</span></a>
+
+            </div>
+
+        </div>
+
     </div>
+
 </footer>

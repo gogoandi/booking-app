@@ -6,7 +6,13 @@ import { Component, input } from '@angular/core';
   imports: [],
   templateUrl: './button.component.html',
   styleUrl: './button.component.css',
+
+  host: {
+    '[class.white-bg]': 'hasWhiteBg()',
+  },
 })
 export class ButtonComponent {
-    buttonName = input.required<string>();
+  buttonName = input.required<string>();
+
+  hasWhiteBg = input(false);
 }
