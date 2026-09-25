@@ -109,6 +109,17 @@
                 Don't have an account?
                 <a routerLink="/register" class="register-link">Create an account</a>
             </p>
+
+            @if (checkSuccessSignUp) {
+            <div class="register-success" role="status">
+                <span class="register-success-icon">✓</span>
+
+                <div class="register-success-content">
+                    <strong>Registration successful!</strong>
+                    <p>Your account has been created successfully. You can now log in.</p>
+                </div>
+            </div>
+            }
         </div>
     </div>
 </div>

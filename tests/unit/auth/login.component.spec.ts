@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal, WritableSignal } from '@angular/core';
 import { provideRouter, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from 'vitest';
+
 import { AuthService } from '../../../src/app/auth/auth.service';
 import { LoginComponent } from '../../../src/app/auth/login/login.component';
 
@@ -12,22 +14,40 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   let element: HTMLElement;
   let request: Subject<AuthResponse>;
-  let authService: { authRequest: ReturnType<typeof vi.fn> };
+
+  let authService: {
+    authRequest: ReturnType<typeof vi.fn>;
+    successSignUp: WritableSignal<boolean>;
+  };
+
   let navigate: MockInstance<Router['navigate']>;
 
   beforeEach(async () => {
     request = new Subject<AuthResponse>();
-    authService = { authRequest: vi.fn().mockReturnValue(request.asObservable()) };
+
+    authService = {
+      authRequest: vi.fn().mockReturnValue(request.asObservable()),
+      successSignUp: signal(false),
+    };
 
     await TestBed.configureTestingModule({
       imports: [LoginComponent],
-      providers: [provideRouter([]), { provide: AuthService, useValue: authService }],
+      providers: [
+        provideRouter([]),
+        {
+          provide: AuthService,
+          useValue: authService,
+        },
+      ],
     }).compileComponents();
 
     navigate = vi.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
+
     fixture = TestBed.createComponent(LoginComponent);
+
     component = fixture.componentInstance;
     element = fixture.nativeElement;
+
     fixture.detectChanges();
   });
 
@@ -36,15 +56,18 @@ describe('LoginComponent', () => {
     vi.restoreAllMocks();
   });
 
-  function setInputValue(name: string, value: string) {
+  function setInputValue(name: string, value: string): void {
     const input = element.querySelector<HTMLInputElement>(`input[name="${name}"]`)!;
+
     input.value = value;
+
     input.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
-  function fillValidForm() {
+  function fillValidForm(): void {
     setInputValue('email', 'guest@example.com');
     setInputValue('password', 'Password1!');
+
     fixture.detectChanges();
   }
 
@@ -55,10 +78,13 @@ describe('LoginComponent', () => {
 
     setInputValue('email', 'invalid-email');
     setInputValue('password', 'Password1!');
+
     fixture.detectChanges();
+
     expect(button.disabled).toBe(true);
 
     fillValidForm();
+
     expect(button.disabled).toBe(false);
   });
 
@@ -66,18 +92,26 @@ describe('LoginComponent', () => {
     component.onSubmit();
 
     expect(authService.authRequest).not.toHaveBeenCalled();
+
     expect(component.isLoading()).toBe(false);
+
     expect(component.loginForm.controls.loginEmail.touched).toBe(true);
+
     expect(component.loginForm.controls.loginPassword.touched).toBe(true);
   });
 
   it('submits credentials through the form and shows the loading spinner', () => {
     fillValidForm();
+
     component.failedLogin.set('Previous error');
 
-    element
-      .querySelector('form')!
-      .dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    element.querySelector('form')!.dispatchEvent(
+      new Event('submit', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+
     fixture.detectChanges();
 
     expect(authService.authRequest).toHaveBeenCalledExactlyOnceWith(
@@ -85,8 +119,11 @@ describe('LoginComponent', () => {
       'guest@example.com',
       'Password1!',
     );
+
     expect(component.isLoading()).toBe(true);
+
     expect(element.querySelector('app-loading-spinner')).not.toBeNull();
+
     expect(element.querySelector('[role="alert"]')).toBeNull();
   });
 
@@ -101,6 +138,7 @@ describe('LoginComponent', () => {
 
   it('resets the form, hides the spinner, and opens the dashboard after login', () => {
     fillValidForm();
+
     component.onSubmit();
 
     request.next({
@@ -111,31 +149,60 @@ describe('LoginComponent', () => {
       refreshToken: 'test-refresh-token',
       expiresIn: '3600',
     });
+
     request.complete();
+
     fixture.detectChanges();
 
-    expect(component.loginForm.getRawValue()).toEqual({ loginEmail: '', loginPassword: '' });
+    expect(component.loginForm.getRawValue()).toEqual({
+      loginEmail: '',
+      loginPassword: '',
+    });
+
     expect(component.isLoading()).toBe(false);
+
     expect(element.querySelector('app-loading-spinner')).toBeNull();
+
     expect(navigate).toHaveBeenCalledExactlyOnceWith(['/dashboard']);
   });
 
   it('displays the error, preserves credentials, and stops loading after failure', () => {
     fillValidForm();
+
     component.onSubmit();
 
     request.error(new Error('Incorrect email or password.'));
+
     fixture.detectChanges();
 
     expect(element.querySelector('[role="alert"]')?.textContent).toContain(
       'Incorrect email or password.',
     );
+
     expect(component.loginForm.getRawValue()).toEqual({
       loginEmail: 'guest@example.com',
       loginPassword: 'Password1!',
     });
+
     expect(component.isLoading()).toBe(false);
+
     expect(element.querySelector('app-loading-spinner')).toBeNull();
+
     expect(navigate).not.toHaveBeenCalled();
+  });
+
+  it('clears the registration success message when leaving the login page', () => {
+    // Simulate a successful registration.
+    authService.successSignUp.set(true);
+
+    fixture.detectChanges();
+
+    expect(component.checkSuccessSignUp).toBe(true);
+
+    // Simulate navigating away from Login.
+    fixture.destroy();
+
+    // The registration message should be cleared.
+    expect(authService.successSignUp()).toBe(false);
   });
 });

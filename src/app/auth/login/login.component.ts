@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnDestroy, signal } from '@angular/core';
 import { ButtonComponent } from '../../shared/button/button.component';
 import { FormFieldComponent } from '../../shared/form-field/form-field.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -19,7 +19,7 @@ import { finalize } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   isLoading = signal(false);
   constructor(
     private authService: AuthService,
@@ -94,5 +94,13 @@ export class LoginComponent {
           this.failedLogin.set(error.message);
         },
       });
+  }
+
+  get checkSuccessSignUp() {
+    return this.authService.successSignUp();
+  }
+
+  ngOnDestroy(): void {
+      this.authService.successSignUp.set(false);
   }
 }

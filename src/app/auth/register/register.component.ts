@@ -9,7 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import { FormFieldComponent } from '../../shared/form-field/form-field.component';
 import { ButtonComponent } from '../../shared/button/button.component';
@@ -71,7 +71,7 @@ export class RegisterComponent {
   isLoading = signal(false);
   failedRegister = signal('');
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   isPasswordFocused = false;
 
@@ -168,6 +168,8 @@ export class RegisterComponent {
         console.log('Registration successful:', resData);
         this.isLoading.set(false);
         this.registerForm.reset();
+        this.authService.successSignUp.set(true);
+        this.router.navigate(['/login']);
       },
 
       error: (failedRegister: Error) => {

@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, catchError, Subject, tap } from 'rxjs';
 import { throwError } from 'rxjs';
 import { UserModel } from './user.model';
@@ -29,26 +29,40 @@ export class AuthService {
   user = new BehaviorSubject<UserModel | null>(null);
   private tokenExpirationTimer: any;
 
+  successSignUp = signal<boolean>(false);
+
   // One method for both the signup and login request since the requests are almost identical(both require only email/password and both are of POST type). The only difference is the API endpoint which still only changes between 'signUp'  or 'signInWithPassword'
   authRequest(authType: 'signUp' | 'signInWithPassword', email: string, password: string) {
+    if (authType === 'signUp') {
+      this.successSignUp.set(false);
+    }
+
     return this.httpRequest
       .post<AuthResponseData>(
         'https://identitytoolkit.googleapis.com/v1/accounts:' + authType + '?key=' + this.apiKey,
         {
-          email: email,
-          password: password,
+          email,
+          password,
           returnSecureToken: true,
         },
       )
       .pipe(
         catchError(this.handleError),
+
         tap((resData) => {
-          this.handleAuthentication(
-            resData.email,
-            resData.localId,
-            resData.idToken,
-            +resData.expiresIn,
-          );
+          if (authType === 'signUp') {
+            // Registration successful.
+            // Do NOT create or save an authenticated session.
+            this.successSignUp.set(true);
+          } else {
+            // Only log the user in after successful authentication.
+            this.handleAuthentication(
+              resData.email,
+              resData.localId,
+              resData.idToken,
+              +resData.expiresIn,
+            );
+          }
         }),
       );
   }
