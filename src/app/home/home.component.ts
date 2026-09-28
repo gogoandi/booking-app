@@ -7,6 +7,5 @@ import { HeroComponent } from '../hero/hero.component';
   selector: 'app-home',
   imports: [HeroComponent, HotelsComponent, SearchEngineComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
 })
 export class HomeComponent {}
